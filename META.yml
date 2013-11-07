@@ -29,13 +29,14 @@ no_index:
 provides:
   Test::MonkeyMock:
     file: lib/Test/MonkeyMock.pm
-    version: 0.05
+    version: 0.06
 requires:
   Carp: 0
+  Storable: 0
 resources:
   bugtracker: https://github.com/vti/test-monkeymock/issues
   homepage: https://github.com/vti/test-monkeymock
   repository: git://github.com/vti/test-monkeymock.git
-version: 0.05
+version: 0.06
 x_contributors:
   - 'vti <viacheslav.t@gmail.com>'
