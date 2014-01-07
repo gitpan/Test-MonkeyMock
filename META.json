@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
    },
-   "name" : "test-monkeymock",
+   "name" : "Test-MonkeyMock",
    "no_index" : {
       "directory" : [
          "t",
@@ -57,7 +57,7 @@
    "provides" : {
       "Test::MonkeyMock" : {
          "file" : "lib/Test/MonkeyMock.pm",
-         "version" : "0.06"
+         "version" : "0.07"
       }
    },
    "release_status" : "stable",
@@ -71,7 +71,7 @@
          "web" : "https://github.com/vti/test-monkeymock"
       }
    },
-   "version" : "0.06",
+   "version" : "0.07",
    "x_contributors" : [
       "vti <viacheslav.t@gmail.com>"
    ]
