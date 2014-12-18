@@ -13,6 +13,27 @@ subtest 'mock method' => sub {
     is($mock->foo, 'bar');
 };
 
+subtest 'mock method with when option' => sub {
+    my $mock = Test::MonkeyMock->new();
+    $mock->mock(foo => sub { 'bar' }, when => sub { @_ == 2 });
+    $mock->mock(foo => sub { 'else' });
+
+    is($mock->foo(1), 'bar');
+    is($mock->foo,    'else');
+};
+
+subtest 'mock method with frame option' => sub {
+    my $mock = Test::MonkeyMock->new();
+    $mock->mock(foo => sub { 'bar' }, frame => 0);
+    $mock->mock(foo => sub { 'qux' }, frame => 2);
+    $mock->mock(foo => sub { 'else' });
+
+    is($mock->foo, 'bar');
+    is($mock->foo, 'else');
+    is($mock->foo, 'qux');
+    is($mock->foo, 'else');
+};
+
 subtest 'return zero when no calls' => sub {
     my $mock = Test::MonkeyMock->new();
     $mock->mock(foo => sub { 'bar' });
@@ -47,13 +68,11 @@ subtest 'remember the call stack' => sub {
 subtest 'remember the return stack' => sub {
     my $mock = Test::MonkeyMock->new();
 
-    $mock->mock(foo => sub { 'bar' });
-    $mock->foo;
+    my @returns = (qw/bar baz qux/);
+    $mock->mock(foo => sub { shift @returns });
 
-    $mock->mock(foo => sub { 'baz' });
     $mock->foo;
-
-    $mock->mock(foo => sub { 'qux' });
+    $mock->foo;
     $mock->foo;
 
     is_deeply([$mock->mocked_return_args('foo', 0)], ['bar']);
